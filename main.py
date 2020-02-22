@@ -71,6 +71,18 @@ def totalChats():
 #def createChat(*users):
  #   return chatID
 
+@app.route("/createchat")
+def createUsersArray (x, y):
+    x = input("Introduce un usuario: ")
+    y = input("Introduce el segundo usuario": )
+
+    new_chat = [x, y]
+    
+    nombre = ({"Primer usuario":f"{x}"}, {"Segundo usuario":f"{y}"})
+    db.conversations.insert_one(new_chat)
+    return "The user {} has been created".format(name)
+
+
 app.run("0.0.0.0", 5000, debug=True)
 
 
