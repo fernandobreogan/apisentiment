@@ -1,6 +1,5 @@
 import traceback
 
-
 def jsonErrorHandler(fn):
     def wrapper(*args, **kwargs):
         try:

@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 0. APUNTES
-funcionesmongoqueries.ipynb
 setting.json
+.DS_Store
