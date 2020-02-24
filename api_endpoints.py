@@ -4,6 +4,7 @@ import json
 import argparse
 import requests
 from flask import Flask, request
+import binascii
 
 from database import *
 from api import *
@@ -38,14 +39,20 @@ def createChat (chat_name):
 
 #ADD USERS & ADD MESSAGES
 
-@app.route("/chat/<chat_id>/adduser/<username>")
-def addUserToChat(chat_id, username):
-    if checkUserExistsByName (db, username) == True:
-        db.conversations.update({ "$id": chat_id },{ "$push": { "Users": username }})
-        return "The user {} has been added to the chat: {}".format(username, chat_id)
+@app.route("/chat/<chat_name>/adduser/<username>")
+def addUserToChat(chat_name, username):
+    check_user = checkUserExistsByName(db, username)
+    print(f'check user: {check_user}')
+    check_chat = checkChatExistsByName(db, chat_name)
+    print(f'check chat: {check_chat}')
+    if  check_user == True:
+        if check_chat == True:
+            db.conversations.update({ "Name group": chat_name },{ "$push": { "Users": username }})
+        return "The user {} has been added to the chat: {}".format(username, chat_name)
     else:
-        return "The user does not exists"
+        return "Error: either of them does not exist"
 
 #def addMessagesToChat(chat_id, username, message):
+
 
 app.run("0.0.0.0", 8000, debug=True)
