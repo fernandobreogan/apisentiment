@@ -28,7 +28,7 @@ def createUsers (username):
 
 @app.route("/chat/create/<chat_name>")
 def createChat (chat_name):
-    nombre = {"Chat name":f"{chat_name}", "Users": []}
+    nombre = {"Chat name":f"{chat_name}", "Users": [], "Messages":{}}
     chats_match = db.conversations.find({"Chat name":f"{chat_name}"}, projection={"Chat name":True})
     if len(list(chats_match)) > 0: #Checks if the name is taken
         return "That chat name already exists"
@@ -50,7 +50,14 @@ def addUserToChat(chat_name, username):
     else:
         return "Error: either of them does not exist"
 
-#def addMessagesToChat(chat_id, username, message):
-
+def addMessagesToChat(chat_name, username, message):
+    check_user = checkUserExistsByName(db, username)
+    check_chat = checkChatExistsByName(db, chat_name)
+    if  check_user == True:
+        if check_chat == True:
+            db.conversations.update_one({ "Chat name": chat_name }, { "$push": { "Messages": {username:message}}})
+        return "The user {} has been added the message {} the chat: {}".format(username, message)
+    else:
+        return "Error: either of them does not exist"
 
 app.run("0.0.0.0", 8000, debug=True)
