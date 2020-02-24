@@ -55,7 +55,7 @@ def addMessagesToChat(chat_name, username, message):
     check_chat = checkChatExistsByName(db, chat_name)
     if  check_user == True:
         if check_chat == True:
-            db.conversations.update_one({ "Chat name": chat_name }, { "$push": { "Messages": {username:message}}})
+            db.conversations.update_many({ "Chat name": chat_name }, { "$push": { "Messages": {username:message}}})
         return "The user {} has been added the message {} the chat: {}".format(username, message)
     else:
         return "Error: either of them does not exist"
