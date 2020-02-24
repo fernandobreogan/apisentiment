@@ -38,15 +38,14 @@ def createChat (chat_name):
 
 #ADD USERS & ADD MESSAGES
 
-@app.route("/chat/<chat_id>/adduser/<user_to_add>")
-def addUserToChat(chat_id, user_to_add):
-#Con el chatID y con los usuarios, UPDATEAR EL DOCUMENTO DENTRO DE LA COLECCIÓN
-#devuelve: elchataidi
-    
-    db.conversations.update(
-   { "$id": chat_id },
-   { "$push": { "Users":user_to_add }})
+@app.route("/chat/<chat_id>/adduser/<username>")
+def addUserToChat(chat_id, username):
+    if checkUserExistsByName (db, username) == True:
+        db.conversations.update({ "$id": chat_id },{ "$push": { "Users": username }})
+        return "The user {} has been added to the chat: {}".format(username, chat_id)
+    else:
+        return "The user does not exists"
 
-    return chat_id
+#def addMessagesToChat(chat_id, username, message):
 
 app.run("0.0.0.0", 8000, debug=True)
