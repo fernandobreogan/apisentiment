@@ -5,12 +5,12 @@ from bson.objectid import ObjectId
 
 #CHECK EXISTANCE
 def checkUserExistsByName(db, username):
-    user_exists = db.users.find({"Name":f"{username}"}, projection={"Name":True})
-    if len(list(user_exists)) > 0:
+    names_match = db.users.find({"Name":f"{username}"}, projection={"Name":True})
+    if len(list(names_match)) > 0:
         return True
-    else:
-        print("El usuario no existe")
+    else: 
         return False
+
 
 def checkUserExistsByID(db, user_id):
     user_exists = list(db.users.find({"_id":ObjectId(user_id)}, projection={"_id":True}))
@@ -20,10 +20,10 @@ def checkUserExistsByID(db, user_id):
         return False
 
 def checkChatExistsByName(db, chat_name):
-    chat_exists = db.conversations.find({"Chat name":f"{chat_name}"}, projection={"Chat name":True})
-    if len(list(chat_exists)) > 0:
+    chats_match = db.conversations.find({"Chat name":f"{chat_name}"}, projection={"Chat name":True})
+    if len(list(chats_match)) > 0:
         return True
-    else:
+    else: 
         return False
 
 def checkChatExistsByID(db, chat_id):
@@ -62,4 +62,3 @@ def getChatNamebyID(db, chat_id):
     #Get chat name by inputting its ID
     for i in db.conversations.find({"_id":ObjectId(chat_id)}):
         ides = i.get("Chat name")
-    return json.dumps(ides, default=str)

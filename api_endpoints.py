@@ -4,59 +4,67 @@ import json
 import argparse
 import requests
 from flask import Flask, request
+import database as dtb
 
-from database import *
-from api import *
 
 client = MongoClient('mongodb://localhost:27017/') #Connection to the DB
 db = client['eslac'] 
+app = Flask(__name__) 
+
+#TESTING THE API
+@app.route("/test")
+def test ():
+    return "The API works!"
 
 #CREATE USERS & CREATE CHATS
 
 @app.route("/user/create/<username>")
 def createUsers (username):
     nombre = {"Name":f"{username}"}
-    names_match = db.users.find({"Name":f"{username}"}, projection={"Name":True})
-    if len(list(names_match)) > 0: #Checks if the name is taken
-        return "That chat name already exists"
+    if dtb.checkUserExistsByName(db, username) == True:
+        return "That user already exists"
     else: 
         db.users.insert_one(nombre) #Creates document within the users collection
-        laide = getUserIdbyName(db, username)
+        laide = dtb.getUserIdbyName(db, username)
         return "The user {} has been created with the ID {}".format(username, laide)
 
 
 @app.route("/chat/create/<chat_name>")
 def createChat (chat_name):
     nombre = {"Chat name":f"{chat_name}", "Users": [], "Messages":{}}
-    chats_match = db.conversations.find({"Chat name":f"{chat_name}"}, projection={"Chat name":True})
-    if len(list(chats_match)) > 0: #Checks if the name is taken
+    
+    if dtb.checkChatExistsByName(db, chat_name) == True:
         return "That chat name already exists"
     else: 
         db.conversations.insert_one(nombre) #Creates document within the conversations collection
-        laide = getChatIDbyName(db, chat_name)
+        laide = dtb.getChatIDbyName(db, chat_name)
         return "The chat {} has been created with the ID {}".format(chat_name, laide)
 
 #ADD USERS & ADD MESSAGES
 
 @app.route("/chat/<chat_name>/adduser/<username>")
 def addUserToChat(chat_name, username):
-    check_user = checkUserExistsByName(db, username)
-    check_chat = checkChatExistsByName(db, chat_name)
-    if  check_user == True:
-        if check_chat == True:
-            db.conversations.update_one({ "Chat name": chat_name },{ "$push": { "Users": username}})
-        return "The user {} has been added to the chat: {}".format(username, chat_name)
-    else:
-        return "Error: either of them does not exist"
+     check_user = dtb.checkUserExistsByName(db, username)
+     print(check_user)
+     check_chat = dtb.checkChatExistsByName(db, chat_name)
+     print(check_chat)
+     
+     if  check_user == True:
+         if check_chat == True:
+            db.conversations.update_one({ "Chat name": f"{chat_name}" },{ "$push": {"Users": f"{username}"}})
+            return "The user {} has been added to the chat: {}".format(username, chat_name)
+     else:
+         return "Error: either of them does not exist"
 
 @app.route("/chat/<chat_name>/<username>/<message>")
 def addMessagesToChat(chat_name, username, message):
-    check_user = checkUserExistsByName(db, username)
-    check_chat = checkChatExistsByName(db, chat_name)
+    check_user = dtb.checkUserExistsByName(db, username)
+    check_chat = dtb.checkChatExistsByName(db, chat_name)
+    print(type(message))
     if  check_user == True:
         if check_chat == True:
-            db.conversations.update_many({ "Chat name": chat_name }, { "$push": { "Messages": {username:message}}})
-        return "The text {} sent by {} has been added to the chat: {}".format(message, username, chat_name)
+            db.conversations.update_one({ "Chat name": chat_name }, { "$addToSet": { "Messages": f'{message}'}})
+            return "The text '{}' sent by {} has been added to the chat: {}".format(message, username, message)
     else:
         return "Error: either of them does not exist"
 
