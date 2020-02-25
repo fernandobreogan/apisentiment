@@ -4,7 +4,6 @@ import json
 import argparse
 import requests
 from flask import Flask, request
-import binascii
 
 from database import *
 from api import *
@@ -23,7 +22,7 @@ def createUsers (username):
     else: 
         db.users.insert_one(nombre) #Creates document within the users collection
         laide = getUserIdbyName(db, username)
-        return laide
+        return "The user {} has been created with the ID {}".format(username, laide)
 
 
 @app.route("/chat/create/<chat_name>")
@@ -35,7 +34,7 @@ def createChat (chat_name):
     else: 
         db.conversations.insert_one(nombre) #Creates document within the conversations collection
         laide = getChatIDbyName(db, chat_name)
-        return laide
+        return "The chat {} has been created with the ID {}".format(chat_name, laide)
 
 #ADD USERS & ADD MESSAGES
 
@@ -50,6 +49,7 @@ def addUserToChat(chat_name, username):
     else:
         return "Error: either of them does not exist"
 
+@app.route("/chat/<chat_name>/<username>/<message>")
 def addMessagesToChat(chat_name, username, message):
     check_user = checkUserExistsByName(db, username)
     check_chat = checkChatExistsByName(db, chat_name)
