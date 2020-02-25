@@ -4,6 +4,10 @@ API project for Ironhack coding school.
 
 This API allows you to crete a database with users, groups and messages so that you can retrieve that information and later analyze its sentiment using natural language processing. The information is retrieved in a json format so it can be easily manageable.
 
+![Data structure in MongoDB](/input/MongoDBstructure)
+
+![Data structure in MongoDB 2](/input/MongoDBstructure2)
+
 ## Authentication ##
 This API does not require any kind of authentication.
 
@@ -41,3 +45,5 @@ To-do list:
 
 * Sentiment analysis
 Info retrieval endpoints (not just internally)
+
+
