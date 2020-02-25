@@ -7,31 +7,37 @@ from bson.objectid import ObjectId
 def checkUserExistsByName(db, username):
     names_match = db.users.find({"Name":f"{username}"}, projection={"Name":True})
     if len(list(names_match)) > 0:
+        print("The username does exist")
         return True
     else: 
+        print("The username doesn't exist")
         return False
-
 
 def checkUserExistsByID(db, user_id):
     user_exists = list(db.users.find({"_id":ObjectId(user_id)}, projection={"_id":True}))
     if len(user_exists) > 0:
+        print("The user ID does exist")
         return True
-    else:
+    else: 
+        print("The user ID doesn't exist")
         return False
 
 def checkChatExistsByName(db, chat_name):
     chats_match = db.conversations.find({"Chat name":f"{chat_name}"}, projection={"Chat name":True})
     if len(list(chats_match)) > 0:
+        print("The chat name does exist")
         return True
     else: 
+        print("The chat name doesn't exist")
         return False
 
 def checkChatExistsByID(db, chat_id):
-
     chat_exists = list(db.conversations.find({"_id":ObjectId(chat_id)}, projection={"_id":True}))
     if len(chat_exists) > 0:
+        print("The chat ID does exist")
         return True
     else:
+        print("The chat ID doesn't exist")
         return False
 
 

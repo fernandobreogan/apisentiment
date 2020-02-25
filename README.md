@@ -2,7 +2,7 @@
 
 API project for Ironhack coding school.
 
-This API allows you to crete a database with users, groups and messages so that you can retrieve that information and later analyze its sentiment using natural language processing.
+This API allows you to crete a database with users, groups and messages so that you can retrieve that information and later analyze its sentiment using natural language processing. The information is retrieved in a json format so it can be easily manageable.
 
 ## Authentication ##
 This API does not require any kind of authentication.
