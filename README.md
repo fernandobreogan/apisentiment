@@ -4,9 +4,9 @@ API project for Ironhack coding school.
 
 This API allows you to crete a database with users, groups and messages so that you can retrieve that information and later analyze its sentiment using natural language processing. The information is retrieved in a json format so it can be easily manageable.
 
-![Data structure in MongoDB](https://github.com/fernandobreogan/apisentiment/blob/master/input/MongoDBstructure.png)
+![Data structure in MongoDB](https://github.com/fernandobreogan/apisentiment/blob/master/input/MongoDBstructure.png = 100x20)
 
-![Data structure in MongoDB 2](https://github.com/fernandobreogan/apisentiment/blob/master/input/MongoDBstructure2.png)
+![Data structure in MongoDB 2](https://github.com/fernandobreogan/apisentiment/blob/master/input/MongoDBstructure2.png =100x20)
 
 ## Authentication ##
 This API does not require any kind of authentication.
