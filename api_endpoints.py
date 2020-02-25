@@ -31,7 +31,7 @@ def createUsers (username):
 
 @app.route("/chat/create/<chat_name>")
 def createChat (chat_name):
-    nombre = {"Chat name":f"{chat_name}", "Users": [], "Messages":{}}
+    nombre = {"Chat name":f"{chat_name}", "Users": [], "Messages":[]}
     
     if dtb.checkChatExistsByName(db, chat_name) == True:
         return "That chat name already exists"
@@ -63,7 +63,7 @@ def addMessagesToChat(chat_name, username, message):
     print(type(message))
     if  check_user == True:
         if check_chat == True:
-            db.conversations.update_one({ "Chat name": chat_name }, { "$addToSet": { "Messages": f'{message}'}})
+            db.conversations.update_one({ "Chat name": chat_name }, { "$push": {"Messages":{ f"{username}": f'{message}'}}})
             return "The text '{}' sent by {} has been added to the chat: {}".format(message, username, message)
     else:
         return "Error: either of them does not exist"
