@@ -1,20 +1,33 @@
-# Sentiment Analysis Api
-
-API project for Ironhack coding school.
-
-This API allows you to crete a database with users, groups and messages so that you can retrieve that information and later analyze its sentiment using natural language processing. The information is retrieved in a json format so it can be easily manageable.
+<p align="center">
+  <img width="1000" height="300" src="https://github.com/breogann/apisentiment/blob/master/Images/cover.png" alt="Sentiment analysis">
+</p>
 
 
-## Authentication ##
-This API does not require any kind of authentication.
+# Sentiment Analysis API
 
-## GET endpoints: retrieve info ##
+This API allows you to crete a database with users, groups and messages so that you can retrieve that information and later analyze its sentiment using natural language processing. The information is retrieved in a JSON format so it can be easily manageable.
+
+## Data 📊 ##
+
+The API allows the input and retrieval of users, chats and messages:
+
+<p align="center">
+  <img width="500" height="200" src="https://github.com/fernandobreogan/apisentiment/blob/master/input/MongoDBstructure.png" alt="Data structure in MongoDB">
+</p>
+
+<p align="center">
+  <img width="500" height="200" src="https://github.com/fernandobreogan/apisentiment/blob/master/input/MongoDBstructurejson.png" alt="[Data structure in MongoDB in JSON">
+</p>
+
+## Data processing 🛠 ## 
+
+### __GET__ endpoints: retrieve info ###
 
 - 
 
 
 
-## POST endpoints: input info into the DB ##
+### __POST__ endpoints: input info into the DB ###
 
 **Create a user**
 
@@ -28,23 +41,22 @@ This API does not require any kind of authentication.
 
     "/chat/<chat_name>/adduser/<username>"
 
-Add messages to a chat
+**Add messages to a chat**
 
     "/chat/<chat_name>/<username>/<message>"
 
 
-Built with
+
+#### Used technologies 🔌: ####
+- PyMongo
 - Flask
 - Docker
 - Heroku
 
-To-do list:
 
-* Sentiment analysis
-Info retrieval endpoints (not just internally)
+#### Used libraries 📚: ####
+- Pandas
+- Numpy
 
-## Data structure
 
-![Data structure in MongoDB](https://github.com/fernandobreogan/apisentiment/blob/master/input/MongoDBstructure.png)
-
-![Data structure in MongoDB 2](https://github.com/fernandobreogan/apisentiment/blob/master/input/MongoDBstructure2.png)
+* TO-DO: deploy in Heroku!
