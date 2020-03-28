@@ -12,11 +12,11 @@ This API allows you to crete a database with users, groups and messages so that 
 The API allows the input and retrieval of users, chats and messages:
 
 <p align="center">
-  <img width="500" height="200" src="https://github.com/fernandobreogan/apisentiment/blob/master/input/MongoDBstructure.png" alt="Data structure in MongoDB">
+  <img width="500" height="200" src="https://github.com/fernandobreogan/apisentiment/blob/master/images/MongoDBstructure.png" alt="Data structure in MongoDB">
 </p>
 
 <p align="center">
-  <img width="500" height="200" src="https://github.com/fernandobreogan/apisentiment/blob/master/input/MongoDBstructurejson.png" alt="[Data structure in MongoDB in JSON">
+  <img width="500" height="200" src="https://github.com/fernandobreogan/apisentiment/blob/master/images/MongoDBstructurejson.png" alt="[Data structure in MongoDB in JSON">
 </p>
 
 ## Data processing 🛠 ## 
