@@ -1,9 +1,9 @@
-FROM python:3.8.1
+FROM python:3.7.6
 
 COPY . /app
 
 WORKDIR /app
 
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
-CMD ["python3","api.py"]
+CMD ["python3","src/api_endpoints.py"]

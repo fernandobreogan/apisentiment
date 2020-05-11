@@ -13,9 +13,9 @@ db = client['eslac']
 #CREATING AND TESTING THE API
 app = Flask(__name__)
 
-@app.route("/test")
+@app.route("/")
 def test ():
-    return {"Success":"The API works!"}
+    return {"Success":"the API is up and running"}
 
 #CREATE USERS & CREATE CHATS
 @app.route("/user/create/<username>")
@@ -61,8 +61,8 @@ def addMessagesToChat(chat_name, username, message):
     if  dtb.checkUserExistsByName(db, username) == True:
         if dtb.checkChatExistsByName(db, chat_name) == True:
             db.conversations.update_one({ "Chat name": chat_name }, { "$push": {"Messages":{ f"{username}": f'{message}'}}})
-            return {f"The text {message} sent by the user {username} has been added to the chat {chat_name} with the chatID" : f'{chatID}'} #TO-DO: make this the messageID
+            return {f"The text '{message}' sent by the user {username} has been added to the chat {chat_name} with the chatID" : f'{chatID}'} #TO-DO: make this the messageID
     else:
         return "Error: either of them does not exist"
 
-app.run("0.0.0.0", 8000, debug=True)
+app.run("0.0.0.0", 8000, debug=True) #http://0.0.0.0:8000/
