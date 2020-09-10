@@ -4,7 +4,7 @@ import json
 import argparse
 import requests
 from flask import Flask, request
-import retrievalFunctions as dtb
+import src.retrievalFunctions as dtb
 import os
 import dotenv
 dotenv.load_dotenv()
@@ -68,4 +68,4 @@ def addMessagesToChat(chat_name, username, message):
     else:
         return "Error: either of them does not exist"
 
-app.run("0.0.0.0", 8000, debug=False) #http://0.0.0.0:8000/
+app.run("0.0.0.0", 5000, debug=False) #http://0.0.0.0:5000/
