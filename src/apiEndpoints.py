@@ -4,7 +4,10 @@ import json
 import argparse
 import requests
 from flask import Flask, request
-import database as dtb
+import retrievalFunctions as dtb
+import os
+import dotenv
+dotenv.load_dotenv()
 
 #CONNECTION TO THE DB
 client = MongoClient('mongodb://localhost:27017/')
@@ -65,4 +68,4 @@ def addMessagesToChat(chat_name, username, message):
     else:
         return "Error: either of them does not exist"
 
-app.run("0.0.0.0", 8000, debug=True) #http://0.0.0.0:8000/
+app.run("0.0.0.0", 8000, debug=False) #http://0.0.0.0:8000/
