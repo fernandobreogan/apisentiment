@@ -1,5 +1,9 @@
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from textblob import TextBlob
+import spacy
+from collections import Counter
+from string import punctuation
+
 
 
 def checkLanguage (message):
@@ -19,3 +23,6 @@ def messageSentiment(message):
     sia = SentimentIntensityAnalyzer()
     sentiment = sia.polarity_scores(message)
     return sentiment
+
+
+nlp = spacy.load("en-core-web-sm")
