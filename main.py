@@ -5,8 +5,6 @@ import argparse
 import requests
 from flask import Flask, request
 import src.retrievalFunctions as dtb
-from src.sentiment import messageSentiment
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import os
 import dotenv
 dotenv.load_dotenv()
@@ -70,9 +68,9 @@ def addMessagesToChat(chat_name, username, message):
     else:
         return "Error: either of them does not exist"
 
-@app.route("/chat/<message>/sentiment")
+"""@app.route("/chat/<message>/sentiment")
 def hey():
     #Can't import a function under this decorator, so using callback
-    return messageSentiment
+    return messageSentiment"""
 
-app.run("0.0.0.0", 5000, debug=False) #http://0.0.0.0:5000/
+app.run("0.0.0.0", os.getenv("PORT"), debug=True) #http://0.0.0.0:5000/
